@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ express: true }));
 app.use(express.json());
 //home page
-app.get("/home", (req, res) => {
+app.get("/", (req, res) => {
   res.render("home.ejs");
 });
 //firsr page buttons
