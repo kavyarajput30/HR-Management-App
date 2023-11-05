@@ -1,0 +1,63 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="main-div-employee-page">
+      <!-- add new employee  in employee  data table-->
+      <div>
+        <h2>ADD New Employee</h2>
+        <form action="/home/form" method="get">
+          <button class="btn">Add Employee</button>
+        </form>
+      </div>
+
+      <!-- add new HR  in HR data table-->
+      <div>
+        <h2>Add New HR</h2>
+        <form action="/home/hradd/form" method="get">
+          <button class="btn">Add HR</button>
+        </form>
+      </div>
+
+      <!-- add new member in admin data table -->
+      <div>
+        <h2>Add New Admin</h2>
+        <form action="/home/adminadd/form" method="get">
+          <button class="btn">Add</button>
+        </form>
+      </div>
+
+      <!-- add new student -->
+      <div>
+        <h2>Add New Student</h2>
+        <form action="/home/form/student" method="get">
+          <button class="btn" id="student-add-button">Click Here</button>
+        </form>
+      </div>
+
+      <!-- mark and remove attendence of any employee -->
+      <div id="mark-attendence">
+        <h2>Mark/Remove Attendence</h2>
+        <form action="/changeAttendance" method="post">
+          <label for="employee_id">Employee ID</label>
+          <input type="text" name="employee_id" id="employee_id" />
+
+          <label for="date">Date</label>
+          <input type="date" name="date" id="date" />
+
+          <select id="attendanceStatus" name="status">
+            <option>Select Status</option>
+            <option value="Present">Present</option>
+            <option value="Absent">Absent</option>
+          </select>
+
+          <button class="btn" id="employee-add-button">Click Here</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

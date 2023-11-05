@@ -1,0 +1,52 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div id="leave-data">
+      <h1>Leave Requests</h1>
+      <table>
+        <tr>
+          <th>Rquest ID</th>
+          <th>Employee ID</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Reason</th>
+        </tr>
+        <% for(let user of data){ %>
+        <tr>
+          <td><%= user.request_id %></td>
+          <td><%= user.employee_id %></td>
+          <td><%= user.startDate %></td>
+          <td><%= user.endDate %></td>
+          <td><%= user.reason%></td>
+
+          <td>
+            <form action="/leaveappl/rqst" method="post">
+             <input type="hidden" name="status" value= "accept" >
+             <input type="hidden" name ="employee_id" value=<%= user.employee_id %>>
+             <input type="hidden" name ="request_id" value= <%= user.request_id %> >
+
+              <button class="btn">Accept</button>
+            </form>
+          </td>
+          <td>
+            <form action="/leaveappl/rqst" method="post">
+                <input type="hidden" name="status" value= "reject" >
+                <input type="hidden" name ="employee_id" value=<%= user.employee_id %>>
+                <input type="hidden" name ="request_id" value= <%= user.request_id %> >
+              <button class="btn">Reject</button>
+            </form>
+          </td>
+        </tr>
+
+        <% } %>
+
+        <!-- Add more rows as needed -->
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Form</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <!-- student add form -->
+
+    <div id="form-main-div">
+      <form method="post" action="/form/submit/student">
+        <div id="form-info-box">
+          <div>
+            <label for="name">Name*</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Name"
+              required
+            />
+          </div>
+
+          
+
+          <div>
+            <label for="student_ID">Student ID*</label>
+            <input
+              type="number"
+              name="studentID"
+              id="studentID"
+              placeholder="student ID"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="mobile">Mobile Number*</label>
+            <input
+              type="number"
+              name="mobile"
+              id="mobile"
+              placeholder="Mobile Number"
+              minLength="{10}"
+              required
+            />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
+             
+            />
+          </div>
+
+          <div>
+            <label for="courses">Courses</label>
+            <select name="courses" id="courses">
+              <option className="jk">Select any one --</option>
+              <option value="full stack web developer">
+                Full Stack Web Developer
+              </option>
+              <option value="Blockchain developer">Blockchain Developer</option>
+              <option value="Cyber Security">Manager</option>
+              <option value="UI/UX Designer">UI/UX Designer</option>
+              <option value="Data Analyst">Data Analyst</option>
+              <option value="Intern">Intern</option>
+              <option value="software engineer">Software Engineer</option>
+            </select>
+          </div> 
+           <div>
+            <label for="Date">Joining Date</label>
+            <input type="date" name="date" id="Date" />
+          </div>
+
+          <div>
+            <button id="form-button">Add Now</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html> 

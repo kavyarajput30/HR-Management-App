@@ -1,0 +1,79 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Form</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div id="form-main-div">
+      <form method="post" action="/form/hr/submit">
+        <div id="form-info-box">
+          <div>
+            <label for="username">UserName*</label>
+            <input
+              type="text"
+              name="username"
+              id="name"
+              placeholder="UserName"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="email">Email Address*</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email Address"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="employeeID">Employee ID*</label>
+            <input
+              type="number"
+              name="employeeID"
+              id="employeeID"
+              placeholder="employee ID"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="mobile">Mobile Number*</label>
+            <input
+              type="number"
+              name="mobile"
+              id="mobile"
+              placeholder="Mobile Number"
+              minLength="{10}"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="courses">Position</label>
+            <select name="courses" id="courses">
+              <option className="jk">Select any one --</option>
+              <option value="senior HR">Senior HR</option>
+              <option value="junior HR">Junior HR</option>
+              <option value="Intern">Intern</option>
+            </select>
+          </div>
+          <div>
+            <label for="message">Joining Date</label>
+            <input type="date" name="joiningDate" id="message" />
+          </div>
+
+          <div>
+            <button id="form-button">Add Now</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
