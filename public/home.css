@@ -1,0 +1,56 @@
+#heading {
+  text-align: center;
+  color: rgb(0, 0, 0);
+  font-size: 60px;
+}
+#heading span {
+  color: #ffb000;
+}
+#navbar2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.home-buttons {
+  background-color: #f6cd76;
+  width: 300px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-weight: 600;
+  border-radius: 10px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+
+
+
+@media (max-width: 768px) {
+    #heading {
+      font-size: 40px;
+    }
+  
+    .home-buttons {
+      width: 200px;
+      height: 80px;
+      font-size: 24px;
+    }
+  }
+  
+  /* Responsive styles for even smaller screens, e.g., phones */
+  @media (max-width: 480px) {
+    #heading {
+      font-size: 30px;
+    }
+  
+    .home-buttons {
+      width: 150px;
+      height: 60px;
+      font-size: 20px;
+    }
+  }

@@ -1,0 +1,94 @@
+#main-employee-page {
+  padding: 20px;
+}
+
+
+#leave-status-check-box {
+  background-color: #ede0c3;
+  font-size: 18px;
+  padding: 20px 10px;
+  width: 400px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+#abc {
+  display: flex;
+}
+#employee-details-div {
+  background-color: #fae9c4;
+  padding: 40px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  font-size: 20px;
+  gap: 10px;
+  margin-right: 80px;
+  border-radius: 5px;
+}
+
+#attendance-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#leave-form {
+  background-color: rgb(227, 194, 119);
+  font-size: 20px;
+  gap: 15px;
+  margin-top: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+#leave-form input {
+  font-size: 20px;
+  margin: 10px;
+}
+
+#employee-details-div h4,
+#attendance-form h4 {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
+
+
+/* responsive */
+@media (max-width: 768px) {
+    #leave-status-check-box {
+      width: 300px;
+    }
+    
+    #employee-details-div {
+      padding: 20px;
+      font-size: 20px;
+      width: 100%;
+    }
+    #abc {
+        display: flex;
+        flex-direction: column;
+      }
+  }
+  
+  /* Responsive styles for phones */
+  @media (max-width: 480px) {
+    #leave-status-check-box {
+      width: 200px;
+    }
+    
+    #employee-details-div {
+      padding: 10px;
+      font-size: 16px;
+      width: 100%;
+    }
+    #abc {
+        display: flex;
+        flex-direction: column;
+      }
+  }
