@@ -1,0 +1,40 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/studentpage1.css">
+  </head>
+  <body>
+    <div id="date-time">
+      <p>Today's Date: <%= new Date().toLocaleDateString() %></p>
+      <p>Login Time: <%= new Date().toLocaleTimeString() %></p>
+    </div>
+   
+    <div class="abcd">
+
+      <div id="student-details-div">
+        <h4>Student Details</h4>
+        <div>Student Name: <%= data.name %> </div>
+
+        <div>Student  ID:<span> <%= data.student_id%> </span></div>
+      </div>
+<!-- student attendence form -->
+      <form action="/student/attendance" method="post">
+
+          <h4>Mark Attendance</h4>
+          <input type="hidden" name="student_id" value=<%= data.student_id  %> >
+          <input type="hidden" name="name" value=<%= data.name  %> >
+          <input type="hidden" name="status" value="Present" />
+          <button class="btn">Mark Attendance</button>
+      </form>
+ 
+
+              
+    </div>
+
+  </body>
+</html>
+
+

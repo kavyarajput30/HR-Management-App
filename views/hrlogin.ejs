@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="login-page">
+        <div id="hr-login-page-content">
+          <h2 class="login-heading">Login to Your HR Account</h2>
+          <form action="/home/hrlogin/:hrID" method="post">
+          <div class="form-group">
+            <div>
+              <label for="hrName">Employee ID:</label>
+              <input type="text" id="hrName" name="hrID" />
+            </div>
+            <div>
+              <label for="password-hr">Password:</label>
+              <input type="password" id="password-hr" name="password_hr"/>
+            </div>
+  
+            <button class="btn" id="hr-login-button">Login</button>
+          </div>
+           </form>
+          
+        
+        </div>
+
+
+        <div class="info-login">
+          <h3>Try login with these Credentials</h3>
+          <h4>User ID: <span>rahul12</span></h4>
+          <h4>Password: <span>iamHR</span></h4>
+          </div>
+      </div>
+</body>
+</html>

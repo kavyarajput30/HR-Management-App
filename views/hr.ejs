@@ -1,0 +1,103 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HR Page</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/hr.css">
+  </head>
+  <body>
+    <div id="main-HR-page">
+      <div id="HR-details-div">
+        <h4>Details</h4>
+        <div>Employee Name: <span> <%=data.Employee_Name%> </span></div>
+
+        <div>Employee ID:<span> 123456789</span></div>
+        <div>Employee Designation:<span> Senior HR</span></div>
+      </div>
+
+      <div class="cde">
+        <div id="total-working-employye">
+          
+            <p>Total Employee</p>
+            <p><%= total %></p>
+      
+        </div>
+        <div id="add-new-employe">
+          <h4>Add New Employee</h4>
+          <form action="/home/form" method="get">
+            <button class="btn" id="employee-add-button">Click Here</button>
+          </form>
+        </div>
+        <div id="add-new-student">
+          <h4>Add New Student</h4>
+          <form action="/home/form/student" method="get">
+            <button class="btn" id="student-add-button">Click Here</button>
+          </form>
+        </div>
+        <div id="leave-rqst">
+          <h4>Leave Request</h4>
+          <form action="/leave/action" method="get">
+            <button class="btn">Click Here</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="mark-attendence">
+        <h2>Mark/Remove Attendence</h2>
+        <form action="/changeAttendance" method="post">
+          <label for="employee_id">Employee ID</label>
+          <input type="text" name="employee_id" id="employee_id" />
+
+          <label for="date">Date</label>
+          <input type="date" name = "date" id="date">
+
+          <select id="attendanceStatus" name="status">
+            <option>Select Status</option>
+            <option value="Present">Present</option>
+            <option value="Absent">Absent</option>
+          </select>
+
+          <button class="btn" id="employee-add-button">Click Here</button>
+        </form>
+      </div>
+
+
+      <div class="search-box">
+      <div id="employee-search-details">
+        <h4>Search Employee</h4>
+        <form action="/hrPage/:empID" method="post">
+          <div id="search-div">
+            <input
+              type="search"
+              placeholder=" enter employee id"
+              id="employee-search"
+              name="employee_search"
+            />
+            <button class="btn" id="employee-search-button">Search</button>
+          </div>
+        </form>
+      </div>
+      <div id="student-search-details">
+        <h4>Search Student</h4>
+        <form action="/studentpage/details" method="post">
+          <div id="search-div">
+            <input
+              type="search"
+              placeholder=" enter student id"
+              id="student-search"
+              name="student_search"
+            />
+            <button class="btn" id="student-search-button">Search</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+      <div class="icon-msg">
+        <a> <img src="email.png" alt="" /> </a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <div class="login-page">
+      <h2 class="login-heading">Login to Admin Account</h2>
+      <form action="/adminpage" method="post">
+        <div class="form-group">
+          <div>
+            <label for="userID"> userID:</label>
+            <input type="text" id="userID" name="userID" />
+          </div>
+          <div>
+            <label for="adminpassword">Password:</label>
+            <input type="password" id="adminpassword" name="password" />
+          </div>
+          <button class="btn" id="admin-login-button">Login</button>
+        </div>
+      </form>
+
+      <div class="info-login">
+        <h3>Try login with these Credentials</h3>
+        <h4>User ID: <span>komal01</span></h4>
+        <h4>Password: <span>workhard</span></h4>
+        </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/employee1.css" />
+  </head>
+  <body>
+    <div id="main-employee-page">
+      <div id="date-time">
+        <p>Today's Date: <%= new Date().toLocaleDateString() %></p>
+        <p>Login Time: <%= loginTime.toLocaleTimeString() %></p>
+      </div>
+
+      <!-- //  check the leave status here  -->
+      <div id="leave-status-check-box">
+        <p>Check your leave application</p>
+        <form action="/leave/status" method="post">
+          <label for="reqstID">Enter Your Request ID</label>
+          <input type="number" name="reqstID" id="reqstID" placeholder="" />
+          <button class="btn">CHECK</button>
+        </form>
+      </div>
+
+      <div id="abc">
+        <div id="employee-details-div">
+          <h4>Employee Details</h4>
+          <div>
+            Employee Name: <%=data.Employee_Name%>
+
+            <div>Employee ID:<span> <%=data.Employee_ID%> </span></div>
+            <div>Employee Designation:<span> <%=data.designation%></span></div>
+          </div>
+          <!-- // attendance marked form -->
+          <form action="/markAttendance" method="post">
+            <div id="attendance-form">
+              <h4>Mark Attendance</h4>
+              <input type="hidden" name="employee_id" value="<%= data.Employee_ID %>" />
+              <input type="hidden" name="status" value="Present" />
+              <button class="btn">Mark Attendance</button>
+            </div>
+          </form>
+        </div>
+
+      <!-- //  leave form -->
+        <div id="leave-form">
+          <h2>Leave Application</h2>
+          <div class="form-group">
+            <form action="/op" method="post">
+              <input type="hidden" name="employee_id" value="<%= data.Employee_ID %>" />
+              <div>
+                <label for="leaveEmployeeName">Employee Name:</label>
+                <input type="text" id="leaveEmployeeName" name="employee_name" />
+              </div>
+              <div>
+                <label for="leaveReason">Reason for Leave:</label>
+                <textarea id="leaveReason" cols="31" name="reason"></textarea>
+              </div>
+              <div>
+                <label for="from">From:</label>
+                <input type="date" id="from" name="start_date" min="<%= new Date().toISOString().split('T')[0] %>" />
+                <label for="to">To:</label>
+                <input type="date" id="to" name="end_date" min="<%= new Date().toISOString().split('T')[0] %>" />
+              </div>
+              <button class="btn">Submit Leave Application</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
