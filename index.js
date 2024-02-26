@@ -191,13 +191,16 @@ app.post("/markAttendance", (req, res) => {
 app.get("/home/form", (req, res) => {
   res.render("form.ejs");
 });
+//add new hr
 app.get("/home/hradd/form", (req, res) => {
   res.render("hrAddForm.ejs");
 });
+// add new admin
 app.get("/home/adminadd/form", (req, res) => {
   res.render("adminAddForm.ejs");
 });
 
+// add data of new employee to the table
 app.post("/form/submit", (req, res) => {
   let { name, email, mobile, courses, message, employeeID } = req.body;
   let id = uuidv4();
@@ -324,7 +327,7 @@ app.post("/leaveappl/rqst", (req, res) => {
       console.error("Error accepting request: " + err);
       res.status(500).json({ error: "Error accepting request " });
     } else {
-      res.json({ message: "Leave Accepted successfully" });
+      res.json({ message: "Status Updated Successfully" });
     }
   });
 });
