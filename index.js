@@ -25,21 +25,21 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.render("home.ejs");
 });
+
 //firsr page buttons
-app.get("/home/emplogin", (req, res) => {
-  res.render("employeelogin.ejs");
+app.get("/emplogin", (req, res) => {
+  res.render("employeelogin.ejs" , );
 });
-app.get("/home/hrlogin", (req, res) => {
+app.get("/hrlogin", (req, res) => {
+ 
   res.render("hrlogin.ejs");
 });
-app.get("/home/adminlogin", (req, res) => {
+app.get("/adminlogin", (req, res) => {
   res.render("adminlogin.ejs");
 });
-app.get("/home/studentlogin", (req, res) => {
-  res.render("studentlogin.ejs");
-});
+
 //login pages of all 4 peoples
-app.post("/home/emplogin/:employeeID", (req, res) => {
+app.post("/emplogin", (req, res) => {
   const { employeeID, password } = req.body;
   const loginTime = new Date();
   let q = `SELECT * FROM employee_data WHERE Employee_ID = ?  AND password = ? `;
@@ -48,21 +48,24 @@ app.post("/home/emplogin/:employeeID", (req, res) => {
   connection.query(q, values, (err, result) => {
     if (err) {
       console.error(err);
-      return res.status(500).send("Database error");
+      return res.status(500).render("res.ejs",{info:"Database error"});
     }
     if (result.length === 1) {
       const data = result[0];
-
       // Compare hashed passwords here (recommended to use a library like bcrypt)
       if (password === data.password) {
         return res.render("employee1.ejs", { data, loginTime });
       }
     }
-
-    return res.status(401).send("Wrong ID or password");
+    return res.status(401).render("res.ejs",{info:"Wrong ID or Password"});
   });
 });
-app.post("/home/hrlogin/:hrID", (req, res) => {
+
+
+
+
+
+app.post("/hrlogin", (req, res) => {
   const { hrID, password_hr } = req.body;
 
   const q1 = "SELECT * FROM hr_data WHERE username = ? AND password = ?";
@@ -73,7 +76,7 @@ app.post("/home/hrlogin/:hrID", (req, res) => {
   connection.query(q1, values1, (err1, result1) => {
     if (err1) {
       console.error(err1);
-      return res.status(500).send("Database error");
+      return res.status(500).render("res.ejs",{info:"Database error"});
     }
 
     if (result1.length === 1) {
@@ -84,16 +87,16 @@ app.post("/home/hrlogin/:hrID", (req, res) => {
         connection.query(q2, (err2, result2) => {
           if (err2) {
             console.error(err2);
-            return res.status(500).send("Database error");
+            return res.status(500).render("res.ejs",{info:"Database error"});
           }
           const total = result2[0].total;
           return res.render("hr.ejs", { data, total });
         });
       } else {
-        return res.status(401).send("Wrong ID or password");
+        return res.status(401).render("res.ejs",{info:"Wrong ID or Password"});
       }
     } else {
-      return res.status(401).send("Wrong ID or password");
+      return res.status(401).render("res.ejs",{info:"Wrong ID or Password"});
     }
   });
 });
@@ -105,7 +108,7 @@ app.post("/adminpage", (req, res) => {
   connection.query(q, values, (err, result) => {
     if (err) {
       console.error(err);
-      return res.status(500).send("Database error");
+      return res.status(500).render("res.ejs",{info:"Database error"});
     }
     if (result.length === 1) {
       const data = result[0];
@@ -116,53 +119,12 @@ app.post("/adminpage", (req, res) => {
       }
     }
 
-    return res.status(401).send("Wrong ID or password");
-  });
-});
-app.post("/studentpage1", (req, res) => {
-  const { studentID, password } = req.body;
-  let q = `SELECT * FROM student_data WHERE student_id = ?  AND password = ? `;
-  const values = [studentID, password];
-
-  connection.query(q, values, (err, result) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send("Database error");
-    }
-    if (result.length === 1) {
-      const data = result[0];
-
-      // Compare hashed passwords here (recommended to use a library like bcrypt)
-      if (password === data.password) {
-        return res.render("studentpage1.ejs", { data });
-      }
-    }
-
-    return res.status(401).send("Wrong ID or password");
+    return res.status(401).render("res.ejs",{info:"Wrong ID or Password"});
   });
 });
 
-//mark student attendence
-app.post("/student/attendance", (req, res) => {
-  const { student_id, status, name } = req.body;
-  const today = new Date();
-  const attendance_date = today.toISOString().split("T")[0];
 
-  const query =
-    "INSERT INTO student_attendance (student_id, attendance_date, status , name) VALUES (?, ?, ?,?)";
-  connection.query(
-    query,
-    [student_id, attendance_date, status, name],
-    (err, results) => {
-      if (err) {
-        console.error( err);
-        res.status(500).json({ error: "Error marking attendance" });
-      } else {
-        res.json({ message: "Attendance marked successfully" });
-      }
-    }
-  );
-});
+
 //mark employeee attendence from employee page
 app.post("/markAttendance", (req, res) => {
   const { employee_id, status } = req.body;
@@ -179,18 +141,19 @@ app.post("/markAttendance", (req, res) => {
     (err, results) => {
       if (err) {
         console.error("Error marking attendance: " + err);
-        res.status(500).json({ error: "Error marking attendance" });
+        res.status(500).render("res.ejs", { info: "Error marking attendance" });
       } else {
-        res.json({ message: "Attendance marked successfully" });
+        res.render("res.ejs", { info: "Attendance marked successfully" });
       }
     }
   );
 });
 
 //add employee
-app.get("/home/form", (req, res) => {
+app.get("/add-employee", (req, res) => {
   res.render("form.ejs");
 });
+
 //add new hr
 app.get("/home/hradd/form", (req, res) => {
   res.render("hrAddForm.ejs");
@@ -201,16 +164,17 @@ app.get("/home/adminadd/form", (req, res) => {
 });
 
 // add data of new employee to the table
-app.post("/form/submit", (req, res) => {
+app.post("/submit", (req, res) => {
   let { name, email, mobile, courses, message, employeeID } = req.body;
   let id = uuidv4();
   let q = `INSERT INTO employee_data (Employee_Name ,Employee_ID ,email, phone_no, designation,Joining_Date) VALUES ( "${name}", ${employeeID}, "${email}" ,${mobile}, "${courses}","${message}")`;
   connection.query(q, (err, result) => {
     if (err) {
       console.error(err);
-      res.status(500).send("Error occurred while adding data.");
+      res.status(500).render("res.ejs", {info:"Error occurred while adding data."});
+     
     } else {
-      res.send("Data added successfully.");
+      res.render("res.ejs", {info:"Data added successfully."});
     }
   });
 });
@@ -222,9 +186,9 @@ app.post("/form/hr/submit", (req, res) => {
   connection.query(q, (err, result) => {
     if (err) {
       console.error(err);
-      res.status(500).send("Error occurred while adding data.");
+      res.status(500).render("res.ejs", {info:"Error occurred while adding data."});
     } else {
-      res.send("Data added successfully.");
+      res.render("res.ejs", {info:"Data added successfully."});
     }
   });
 });
@@ -237,27 +201,14 @@ app.post("/hrPage/:empID", (req, res) => {
   connection.query(q, (err, result) => {
     if (err) {
       console.error(err);
-      return res.status(500).send("Error occurred while retrieving data.");
+      return res.status(500).render("res.ejs", {info:"Error occurred while retrieving data."});
     }
     // Render the "searchemployee.ejs" template and pass 'emp_id' and 'result' to it
     res.render("searchemployee.ejs", { id, result });
   });
 });
 
-//search student from HR page
-app.post("/studentpage/details", (req, res) => {
-  const emp_id = req.body; // Assuming 'emp_id' is the key in req.body
-  let id = emp_id.student_search;
-  const q = `SELECT * FROM student_data WHERE student_id=${id}`;
-  connection.query(q, (err, result) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send("Error occurred while retrieving data.");
-    }
-    // Render the "searchemployee.ejs" template and pass 'emp_id' and 'result' to it
-    res.render("searchstudent.ejs", { id, result });
-  });
-});
+
 
 //post leave application
 app.post("/op", (req, res) => {
@@ -272,19 +223,18 @@ app.post("/op", (req, res) => {
   connection.query(q, (err, result) => {
     if (err) {
       console.error(err);
-      res.status(500).send("Error occurred while adding data.");
+      res.status(500).render("res.ejs", {info:"Error occurred while adding data."});
     } else {
       // After successful insertion, retrieve the request_id
       connection.query("SELECT LAST_INSERT_ID() as request_id", (err, rows) => {
         if (err) {
           console.error(err);
-          res.status(500).send("Error occurred while retrieving request_id.");
+          res.status(500).render("res.ejs", {info:"Error occurred while retrieving request_id."});
         } else {
           const request_id = rows[0].request_id;
           // Now you have the request_id, and you can use it as needed
-          res.send(
-            `Leave Application submitted check your status with request_id: ${request_id}`
-          );
+          res.render("res.ejs", {info: `Leave Application submitted check your status with request_id: ${request_id}`} );
+           
         }
       });
     }
@@ -298,9 +248,9 @@ app.post("/form/submit/admin", (req, res) => {
   connection.query(q, (err, result) => {
     if (err) {
       console.error(err);
-      res.status(500).send("Error occurred while adding data.");
+      res.status(500).render("res.ejs", {info:"Error occurred while adding data."});
     } else {
-      res.send("Data added successfully.");
+      res.render("res.ejs", {info:"Data added successfully."});
     }
   });
 });
@@ -311,9 +261,8 @@ app.get("/leave/action", (req, res) => {
   connection.query(q, (err, result) => {
     if (err) {
       console.error(err);
-      return res.status(500).send("Database error");
+      return res.status(500).render("res.ejs",{info:"Database error"});
     } else {
-      console.log(result);
       let data = result;
       res.render("leaverequest.ejs", { data });
     }
@@ -327,7 +276,7 @@ app.post("/leaveappl/rqst", (req, res) => {
       console.error("Error accepting request: " + err);
       res.status(500).json({ error: "Error accepting request " });
     } else {
-      res.json({ message: "Status Updated Successfully" });
+      res.render("res.ejs", { info: "Status Updated Successfully" });
     }
   });
 });
@@ -337,11 +286,10 @@ app.post("/leave/status", (req, res) => {
   connection.query(q, (err, result) => {
     if (err) {
       console.error(err);
-      return res.status(500).send("Database error");
+      return res.status(500).render("res.ejs",{info:"Database error"});
     } else {
-      console.log(result[0].status);
       let data = result;
-      res.send(`your application is ${result[0].status}`);
+      res.render("res.ejs", {info : `your application is ${result[0].status}`});
     }
   });
 });
@@ -355,7 +303,7 @@ app.post("/changeAttendance", (req, res) => {
   const dateObject = new Date(date);
   if (isNaN(dateObject.getTime())) {
     // If the date is not valid, you can handle the error or return an error response.
-    res.status(400).json({ error: "Invalid date format" });
+    res.status(400).render("res.ejs", {info: "Invalid date format"});
     return;
   }
 
@@ -384,9 +332,9 @@ app.post("/changeAttendance", (req, res) => {
             (err, updateResult) => {
               if (err) {
                 console.error("Error updating attendance: " + err);
-                res.status(500).json({ error: "Error updating attendance" });
+                res.status(500).render("res.ejs",{info:"Error updating attendance"});
               } else {
-                res.json({ message: "Attendance updated successfully" });
+                res.render("res.ejs",{info:"Attendance updated successfully"});
               }
             }
           );
@@ -401,9 +349,10 @@ app.post("/changeAttendance", (req, res) => {
             (err, insertResult) => {
               if (err) {
                 console.error("Error marking attendance: " + err);
-                res.status(500).json({ error: "Error marking attendance" });
+                res.status(500).render("res.ejs",{info:"Error marking attendance"});
+                
               } else {
-                res.json({ message: "Attendance marked successfully" });
+                res.render("res.ejs",{info:"Attendance marked successfully"});
               }
             }
           );
@@ -414,21 +363,5 @@ app.post("/changeAttendance", (req, res) => {
 });
 
 
-//add student
-app.get("/home/form/student", (req, res) => {
-  res.render("studentform.ejs");
-});
 
-app.post("/form/submit/student", (req, res) => {
-  let { name,  studentID ,mobile,email,courses,date } = req.body;
-  let id = uuidv4();
-  let q = `INSERT INTO student_data (name ,student_id,course,phone_no,email,joining_date) VALUES ( "${name}", ${studentID},"${courses}",${mobile},"${email}" , "${date}")`;
-  connection.query(q, (err, result) => {
-    if (err) {
-      console.error(err);
-      res.status(500).send("Error occurred while adding data.");
-    } else {
-      res.send("Data added successfully.");
-    }
-  });
-});
+
